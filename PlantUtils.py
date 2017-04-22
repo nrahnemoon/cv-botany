@@ -16,6 +16,9 @@ class PlantUtils:
 		anchors = page.findAll('a')
 		image = urllib.URLopener()
 
+		if not os.path.exists(imgDirLocal):
+			os.makedirs(imgDirLocal)
+
 		for anchor in anchors:
 			href = anchor.get('href')
 			if "png" in href:
