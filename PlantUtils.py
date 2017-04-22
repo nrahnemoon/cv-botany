@@ -3,7 +3,7 @@ import urllib
 import urllib2
 from bs4 import BeautifulSoup
 import os
-from PlantImage import PlantImage
+import PlantImage
 
 imgDirUrl = 'http://mlcv.robotany.ag/data/img_raw/'
 imgDirLocal = './images/'
@@ -32,7 +32,7 @@ class PlantUtils:
 				else:
 					image.retrieve(urlPath, savePath)
 					print('Saved ' + imageName + '.')
-				plantImages.append(PlantImage(savePath))
+				plantImages.append(PlantImage.PlantImage(savePath))
 
 		return plantImages
 

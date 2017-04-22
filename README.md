@@ -2,4 +2,5 @@
 
 Required Packages:
 
-pip install beautifulsoup
+pip install beautifulsoup4
+pip install IPython
