@@ -1,8 +1,9 @@
 import time
 import urllib
 import urllib2
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 import os
+from PlantImage import PlantImage
 
 imgDirUrl = 'http://mlcv.robotany.ag/data/img_raw/'
 imgDirLocal = './images/'
@@ -12,6 +13,7 @@ class PlantUtils:
 	@staticmethod
 	def downloadImages():
 
+		plantImages = []
 		page = BeautifulSoup(urllib2.urlopen(imgDirUrl))
 		anchors = page.findAll('a')
 		image = urllib.URLopener()
@@ -30,6 +32,9 @@ class PlantUtils:
 				else:
 					image.retrieve(urlPath, savePath)
 					print('Saved ' + imageName + '.')
+				plantImages.append(PlantImage(savePath))
+
+		return plantImages
 
 	@staticmethod
 	def getDateFromImageName(imageName):
@@ -38,3 +43,7 @@ class PlantUtils:
 	@staticmethod
 	def getImageNameFromPath(path):
 		return path.split('./images/', 1)[1]
+
+	@staticmethod
+	def getImageDirectory():
+		return imgDirLocal
