@@ -9,11 +9,12 @@ I_leaf =  (imread(Img_ip));
 
 
 %imshow(I_leaf)
-[X Y Ch] = size(I_leaf);
-xmin = 1%X*(crop_size/200)
-ymin = 1%Y*(crop_size/200)
-width = Y*.5% - X*(crop_size/100)
-height = X*.5% - Y*(crop_size/100)
+
+% [X Y Ch] = size(I_leaf);
+% xmin = 1%X*(crop_size/200)
+% ymin = 1%Y*(crop_size/200)
+% width = Y*.5% - X*(crop_size/100)
+% height = X*.5% - Y*(crop_size/100)
 
 %[260, 140, 150, 150]
 
@@ -21,7 +22,7 @@ I_leaf = imcrop(I_leaf, [120, 125, 130, 115]);
 %figure()
 %imshow((I_leaf))
 
-[X Y Ch] = size(I_leaf);
+% [X Y Ch] = size(I_leaf);
 
 
 
@@ -46,24 +47,26 @@ B = I_leaf(:,:,3);
 %title('BLUE')
 
 %% Green Value more than Blue & Red
-Val_GB = G > B;
-G_grt_B = (sum(sum(Val_GB))*100)/(Y*X);
-disp('% Green more than Blue')
-disp(G_grt_B)
 
-Val_GR = G > R;
-G_grt_R = (sum(sum(Val_GR))*100)/(Y*X);
-disp('% Green more than Red')
-disp(G_grt_R)
+
+% Val_GB = G > B;
+% G_grt_B = (sum(sum(Val_GB))*100)/(Y*X);
+% disp('% Green more than Blue')
+% disp(G_grt_B)
+% 
+% Val_GR = G > R;
+% G_grt_R = (sum(sum(Val_GR))*100)/(Y*X);
+% disp('% Green more than Red')
+% disp(G_grt_R)
 
 %% Background
 % White Background in grayscale (---testing---)
-[X Y Ch] = size(I_leaf);
-I_background = (zeros([X Y Ch]));
-
-
-I1 = I_background;
-I2 = B;%I_leaf;
+% [X Y Ch] = size(I_leaf);
+% I_background = (zeros([X Y Ch]));
+% 
+% 
+% I1 = I_background;
+% I2 = B;%I_leaf;
 
 %figure()
 %imshow(I1)
@@ -85,7 +88,7 @@ I2 = B;%I_leaf;
 % [feature] = getFeaturesHOG(B);
 
 Mask = B > 95;
-Mask =  bwareaopen(1-Mask, 15);
+Mask =  bwareaopen(1-Mask, 10);
 %figure()
 %imshow(Mask)
 
@@ -149,14 +152,6 @@ labels = linspace(0, 2*numel(Ellipse_Data) , 2*numel(Ellipse_Data) + 1)';
 Mask1 = [];
 beta = 40.0;
 [M, ~] = grady(maskedILeaf,Mask1,seeds,labels,beta);
-%imshow(M);
-%Result = uint8(M);
-%set(handles.textElapsedTime,'String',['Elapsed time (s): ' num2str(toc(tStart),'%.1f')]);
-%updateResults(handles);
-%set(handles.btnSave,'Enable','on');
-%set(handles.btnCSVArea,'Enable','on');
-%set(handles.rdnContours,'Enable','on');
-%set(handles.rdnLabels,'Enable','on');
 [~,~,imgMarkup] = segoutput(im2double(I_leaf),im2double(M));
 %imshow(imgMarkup)
 
