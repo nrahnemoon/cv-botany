@@ -1,0 +1,8 @@
+
+for i = 1:1:835
+    im = strcat(sprintf('%6.6d', i), '.png');
+    %IMG =  Segmentation(im);
+    IMG = imread(im);
+    imshow(imresize(IMG))
+    pause(.005);
+end
