@@ -1,8 +1,17 @@
+vidObj = VideoWriter('SegmentedResult.mp4', 'MPEG-4');
+open(vidObj);
 
-for i = 1:1:700
+nFrames = 200;
+
+for i = 1:1:nFrames
     im = strcat(sprintf('%6.6d', i), '.png');
     IMG =  Segmentation(im);
     %IMG = imread(im);
-    imshow(imresize(IMG, 10))
-    pause(.05);
+    imshow(imresize(IMG, 3))
+    currFrame = getframe;
+    writeVideo(vidObj,currFrame);
+    %pause(.05);
 end
+
+
+close(vidObj)

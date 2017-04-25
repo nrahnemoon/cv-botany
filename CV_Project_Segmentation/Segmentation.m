@@ -16,9 +16,9 @@ I_leaf =  (imread(Img_ip));
 % width = Y*.5% - X*(crop_size/100)
 % height = X*.5% - Y*(crop_size/100)
 
-%[260, 140, 150, 150]
+%[120, 125, 130, 115]
 
-I_leaf = imcrop(I_leaf, [120, 125, 130, 115]);
+I_leaf = imcrop(I_leaf, [10, 25, 330, 315]);
 %figure()
 %imshow((I_leaf))
 
@@ -107,8 +107,8 @@ EllipseMask = MaskRGB;
 seeds = zeros(numel(Ellipse_Data) * 2 + 1, 2);
 
 while true
-    randX = round((size(Mask, 2) - 2) * rand());
-    randY = round((size(Mask, 1) - 2) * rand());
+    randX = round((size(Mask, 2) - 4) * rand());
+    randY = round((size(Mask, 1) - 4) * rand());
     portion = Mask(randY:(randY+2), randX:(randX+2))
     if all(all(portion == 0)) == 1
         seeds(1,:) = [randX+1, randY+1]
