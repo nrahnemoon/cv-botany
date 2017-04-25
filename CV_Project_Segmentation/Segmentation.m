@@ -18,7 +18,7 @@ I_leaf =  (imread(Img_ip));
 
 %[120, 125, 130, 115]
 
-I_leaf = imcrop(I_leaf, [10, 25, 330, 315]);
+I_leaf = imcrop(I_leaf, [100, 75, 230, 215]);
 %figure()
 %imshow((I_leaf))
 
