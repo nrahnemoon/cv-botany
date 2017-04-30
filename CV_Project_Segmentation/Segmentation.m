@@ -1,5 +1,4 @@
-function imgMarkup = Segmentation(Img_ip)
-
+function [imgMarkup, seeds] = Segmentation(Img_ip)
 
 %% Masking
 % Image to create mask from
@@ -18,7 +17,7 @@ I_leaf =  (imread(Img_ip));
 
 %[120, 125, 130, 115]
 
-I_leaf = imcrop(I_leaf, [100, 75, 230, 215]);
+I_leaf = imcrop(I_leaf, [120, 125, 130, 115]);
 %figure()
 %imshow((I_leaf))
 
@@ -115,11 +114,11 @@ while true
         break
     end
 end
+
 maskedILeaf = uint8(MaskRGB) .* I_leaf;
 copyILeaf = I_leaf;
 
 %Find a background point to select
-
 
 for idx= 1:1:numel(Ellipse_Data)
     y0 = Ellipse_Data(idx, 1).Centroid(2);
@@ -147,12 +146,18 @@ for idx= 1:1:numel(Ellipse_Data)
     seeds((idx - 1)*2 + 3, :) =  [fx2, fy2];
     
 end
+
+disp(seeds)
+
+%%
 labels = linspace(0, 2*numel(Ellipse_Data) , 2*numel(Ellipse_Data) + 1)';
 
 Mask1 = [];
 beta = 40.0;
 [M, ~] = grady(maskedILeaf,Mask1,seeds,labels,beta);
 [~,~,imgMarkup] = segoutput(im2double(I_leaf),im2double(M));
+
+
 %imshow(imgMarkup)
 
 % figure()
